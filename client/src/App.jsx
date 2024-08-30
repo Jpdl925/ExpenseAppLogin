@@ -66,9 +66,9 @@ const App = () => {
 
             <Routes>
               <Route path="/" element={<BlogPage/>} />
-              <Route path="/Login" element={<Login onLogin={handleLogin} setUser={setUser}/>} />
+              <Route path="/Login" element={<Login setUser={setUser}/>} />
               <Route path="/CreateAccount" element={<CreateAccount/>} />
-              <Route path="/Dashboard" element={<Dashboard isDarkMode={isDarkMode}/>} />
+              <Route path="/Dashboard" element={<Dashboard isDarkMode={isDarkMode} onLogin={handleLogin}/>} />
             </Routes>
 
           </Row>

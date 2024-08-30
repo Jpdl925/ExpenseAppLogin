@@ -3,7 +3,7 @@ import { Nav, Navbar, NavDropdown, Container, Image } from "react-bootstrap";
 import { FaRegMoon } from "react-icons/fa";
 import { IoSunnyOutline } from "react-icons/io5";
 import Moon from "../assets/moon.jpg";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const NavBar = ({ isDarkMode, toggleDarkMode, user }) => {
   return (

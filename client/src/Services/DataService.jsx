@@ -53,7 +53,7 @@ const login =  async (loginUser) => {
         let data = await result.json();
         if(data.token != null){
             localStorage.setItem("Token",data.token);
-            localStorage.setItem("UserData",JSON.stringify(data.user)); // might need to comment this out
+            // localStorage.setItem("UserData",JSON.stringify(data.user)); // might need to comment this out
         }
         console.log(data);
         return data;

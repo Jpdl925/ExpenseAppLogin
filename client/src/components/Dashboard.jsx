@@ -11,9 +11,11 @@ import {
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { AddBlogItems, checkToken, GetItemsByUserId, LoggedInData } from "../Services/DataService";
+import Spinner from 'react-bootstrap/Spinner';
 
 
-const Dashboard = ({ isDarkMode }) => {
+
+const Dashboard = ({ isDarkMode, onLogin }) => {
   const [blogTitle, setBlogTitle] = useState("");
   const [blogImage, setBlogImage] = useState("");
   const [blogDescription, setBlogDescription] = useState("");
@@ -24,6 +26,7 @@ const Dashboard = ({ isDarkMode }) => {
 
   const [userId, setUserId] = useState(0);
   const [publisherName, setPublisherName] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   const [blogItems, setBlogItems] = useState([]);
 
@@ -53,6 +56,7 @@ const Dashboard = ({ isDarkMode }) => {
     }
     
   }
+  
   const handleSaveWithUnpublish = async () => {
     let {publisherName, userId} = LoggedInData();
     const notpublished = {
@@ -118,7 +122,9 @@ const Dashboard = ({ isDarkMode }) => {
 
   // Load data
   const loadUserData = async () => {
+    
     let userInfo = LoggedInData();
+    onLogin(userInfo);
     setUserId(userInfo.UserId);
     setPublisherName(userInfo.publisherName);
     console.log(userInfo);
@@ -126,6 +132,7 @@ const Dashboard = ({ isDarkMode }) => {
       let userBlogItems = await GetItemsByUserId(userInfo.userId);
       console.log(userBlogItems);
       setBlogItems(userBlogItems);
+      setIsLoading(false);
     }, 1000)
     
   }
@@ -135,8 +142,10 @@ useEffect(() => {
   if(!checkToken())
   {
     navigate('/Login')
+  } else{
+
+    loadUserData();
   }
-  loadUserData();
 }, [])
 
 const handleImage = async (e) => {
@@ -242,6 +251,15 @@ const handleImage = async (e) => {
           </Modal.Footer>
         </Modal>
 
+        { isLoading ? <>
+          <Spinner animation="grow" variant="info" /> <h2>...Loading</h2> 
+        </> 
+        :
+         blogItems.length == 0 ? <>
+        <h2 className="text-center">No Blog Items to Show.</h2> 
+        </>
+        :
+        
         <Accordion
           defaultActiveKey={["0", "1"]}
           alwaysOpen
@@ -249,7 +267,9 @@ const handleImage = async (e) => {
           <Accordion.Item eventKey="0">
             <Accordion.Header>Published</Accordion.Header>
             <Accordion.Body>
-              {blogItems.map(
+              {
+              
+              blogItems.map(
                 (item,i) =>
                   item.isPublished && (
                     <ListGroup key={i}>
@@ -261,13 +281,17 @@ const handleImage = async (e) => {
                       </Col>
                     </ListGroup>
                   )
-              )}
+              )
+              
+              }
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="1">
             <Accordion.Header>Unpublished</Accordion.Header>
             <Accordion.Body>
-              {blogItems.map(
+              {
+              
+              blogItems.map(
                 (item,i) =>
                   !item.isPublished && (
                     <ListGroup key={i}>
@@ -279,10 +303,13 @@ const handleImage = async (e) => {
                       </Col>
                     </ListGroup>
                   )
-              )}
+              )
+              
+              }
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
+      }
       </Container>
     </>
   );
