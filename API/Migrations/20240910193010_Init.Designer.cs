@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240731023205_intial")]
-    partial class intial
+    [Migration("20240910193010_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,6 +51,9 @@ namespace API.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("PublisherName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Tag")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")

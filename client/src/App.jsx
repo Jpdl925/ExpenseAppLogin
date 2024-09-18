@@ -12,9 +12,11 @@ const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [user, setUser] = useState(null);
   const storedUser = localStorage.getItem("UserData");
+  const [isLoggedin, setIsLoggedin] = useState(false)
 
   const handleLogin = (userData) => {
     setUser(userData);
+    setIsLoggedin(true);//Trigger re-render
   }
 
   useEffect(() => {
@@ -50,7 +52,7 @@ const App = () => {
     <>
       <BrowserRouter>
         <Container className={` p-0 ${isDarkMode ? "bg-dark text-light" : "bg-light"}`} fluid>
-          <NavBar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} user={user}/>
+          <NavBar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} user={user} isLoggedIn={isLoggedin} setIsLoggedIn={setIsLoggedin}/>
         </Container>
         <Container
           fluid

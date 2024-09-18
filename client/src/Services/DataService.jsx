@@ -128,5 +128,30 @@ const login =  async (loginUser) => {
        console.log(data);
        return data;
     }
+    // Function to help us update our blog items
+    const updateBlogItems = async (blogItems) => {
+        let result = await fetch (`http://localhost:5228/api/Blog/UpdateBlogItems`,{
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(blogItems)
+        })
+        if(!result.ok)
+        {
+            const message = `Yo you have an Error Check your code! ${result.status}`;
+            throw new Error(message);
+        }
+            let data = await result.json();
+            console.log(data);
+            return data;
+    }
 
-export {checkToken, createAccount, login, GetLoggedInUser, LoggedInData, AddBlogItems, sendData, getBlogItems, GetItemsByUserId}; 
+    // Function to get our published blog items to display
+    const getPublishedBlogItems = async () => {
+        let result = await fetch(`http://localhost:5228/api/Blog/GetPublishedItems`);
+        let data = await result.json();
+        return data;
+    }
+
+export {checkToken, createAccount, login, GetLoggedInUser, LoggedInData, AddBlogItems, sendData, getBlogItems, GetItemsByUserId, updateBlogItems, getPublishedBlogItems}; 

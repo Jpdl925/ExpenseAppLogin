@@ -76,7 +76,7 @@ namespace API.Services
 
         public IEnumerable<BlogItemModel> GetItemsByUserId(int userId)
         {
-            return _context.BlogInfo.Where(item => item.UserId == userId);
+            return _context.BlogInfo.Where(item => item.UserId == userId && item.IsDeleted == false);
         }
     }
 }

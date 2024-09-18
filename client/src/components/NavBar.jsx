@@ -5,7 +5,19 @@ import { IoSunnyOutline } from "react-icons/io5";
 import Moon from "../assets/moon.jpg";
 import { Link, Navigate } from "react-router-dom";
 
-const NavBar = ({ isDarkMode, toggleDarkMode, user }) => {
+const NavBar = ({
+  isDarkMode,
+  toggleDarkMode,
+  user,
+  isLoggedIn,
+  setIsLoggedIn,
+}) => {
+
+  const handleLogout = () => {
+    localStorage.clear();
+    setUser(null);
+    isLoggedIn(false);
+  }
   return (
     <>
       <Navbar
@@ -28,10 +40,6 @@ const NavBar = ({ isDarkMode, toggleDarkMode, user }) => {
               </Nav.Link>
             </Nav>
 
-
-
-
-
             <Nav className="welcome">
               <Nav.Link href="#deets">
                 {isDarkMode ? (
@@ -44,9 +52,16 @@ const NavBar = ({ isDarkMode, toggleDarkMode, user }) => {
               <Nav.Link as={Link} to={"/CreateAccount"}>
                 Create Account
               </Nav.Link>
-              <Nav.Link as={Link} to={"/Login"}>
-                Login
-              </Nav.Link>
+
+              {isLoggedIn ? (
+                <Nav.Link as={Link} to={"/Login"} onClick={handleLogout}>
+                  Logout
+                </Nav.Link>
+              ) : (
+                <Nav.Link as={Link} to={"/Login"}>
+                  Login
+                </Nav.Link>
+              )}
 
               <Nav.Link>Welcome {user ? user.publisherName : "Guest"}</Nav.Link>
               <Nav.Link eventKey={2} href="#memes">
