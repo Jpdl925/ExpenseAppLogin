@@ -1,4 +1,4 @@
-import { BASELIST_URL } from '../constant'
+import { BASELIST_URL, BASEUSER_URL } from '../constant'
 
 let userData = {};
 if(localStorage.getItem("UserData")){
@@ -19,7 +19,7 @@ const checkToken = () => {
 
 const createAccount = async (createduser) => 
 {
-    const result = await fetch('http://localhost:5228/api/User/AddUsers',{
+    const result = await fetch(`${BASEUSER_URL}/AddUsers`,{
         method: "POST",
         headers:{
             "Content-Type": "application/json"
@@ -28,7 +28,7 @@ const createAccount = async (createduser) =>
     })
     if(!result.ok)
     {
-        const message = `Yo you have an Error Check your code! ${result.status}`;
+        const message = `Error code = ${result.status}`;
         throw new Error(message);
     }
         let data = await result.json();
@@ -37,7 +37,7 @@ const createAccount = async (createduser) =>
 }
 
 const login =  async (loginUser) => {
-    const result = await fetch('http://localhost:5228/api/User/Login',{
+    const result = await fetch(`${BASEUSER_URL}/Login`,{
         method: "POST",
         headers:{
             "Content-Type": "application/json"
@@ -46,7 +46,7 @@ const login =  async (loginUser) => {
     })
     if(!result.ok)
     {
-        const message = `Yo you have an Error Check your code! ${result.status}`;
+        const message = `Error code = ${result.status}`;
         throw new Error(message);
     }
         let data = await result.json();
@@ -59,7 +59,7 @@ const login =  async (loginUser) => {
 
     const GetLoggedInUser = async (username) =>
     {
-       let result = await fetch(`http://localhost:5228/api/User/GetUserByUsername/${username}`)
+       let result = await fetch(`${BASEUSER_URL}/GetUserByUsername/${username}`)
        userData = await result.json();
        console.log(userData);
        localStorage.setItem("UserData", JSON.stringify(userData));
@@ -83,32 +83,13 @@ const login =  async (loginUser) => {
         })
         if(!result.ok)
         {
-            const message = `Yo you have an Error Check your code! ${result.status}`;
+            const message = `Error code = ${result.status}`;
             throw new Error(message);
         }
             let data = await result.json();
             console.log(data);
             return data;
     }
-
-    const sendData = async (controller, endpoint, passedInData) => {
-        let result = await fetch (`http://localhost:5228/api/${controller}/${endpoint}`,{
-            method: "POST",
-            headers:{
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(passedInData)
-        })
-        if(!result.ok)
-        {
-            const message = `Yo you have an Error Check your code! ${result.status}`;
-            throw new Error(message);
-        }
-            let data = await result.json();
-            console.log(data);
-            return data;
-    }
-
 
     const getExpenses = async () => {
         let result = await fetch(`${BASELIST_URL}/GetExpense`)
@@ -135,7 +116,7 @@ const login =  async (loginUser) => {
         })
         if(!result.ok)
         {
-            const message = `Yo you have an Error Check your code! ${result.status}`;
+            const message = `Error code = ${result.status}`;
             throw new Error(message);
         }
             let data = await result.json();
@@ -149,4 +130,4 @@ const login =  async (loginUser) => {
         return data;
     }
 
-export {checkToken, createAccount, login, GetLoggedInUser, LoggedInData, AddExpenses, sendData, getExpenses, GetItemsByUserId, updateExpense, getPublishedExpenses}; 
+export {checkToken, createAccount, login, GetLoggedInUser, LoggedInData, AddExpenses, getExpenses, GetItemsByUserId, updateExpense, getPublishedExpenses}; 

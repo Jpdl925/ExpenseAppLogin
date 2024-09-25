@@ -78,7 +78,7 @@ const Dashboard = ({ isDarkMode, onLogin }) => {
   const handleShow = (e, {id,publisherName,userId, description, category, amount}) => {
     setShow(true);
 
-    if (e.target.textContent === "Add Expense") {
+    if (e.target.textContent === "Add Expense Item") {
       setEdit(false);
       console.log(e.target.textContent, edit);
     } else {
@@ -141,18 +141,7 @@ useEffect(() => {
 
 
 
-const handlePublish = async (item) => {
-  const {userId} = JSON.parse(localStorage.getItem("UserData"));
-  item.isPublished = !item.isPublished;
 
-  let result = await updateExpense(item);
-  if(result){
-    let userExpenses = await GetItemsByUserId(userId);
-    setExpenseItems(userExpenses);
-  }else{
-    alert(`Expense Items not ${edit ? "Updated" : "Added"}`)
-  }
-}
 
 const handleDelete = async (item) => {
   item.isDeleted = !item.isDeleted;
@@ -200,7 +189,7 @@ const handleDelete = async (item) => {
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>Amount</Form.Label>
-              <Form.Control value={expenseAmount} onChange={handleAmount}/>
+              <Form.Control placeholder="Enter Amount" value={expenseAmount} onChange={handleAmount}/>
             </Form.Group>
 
               <Form.Group controlId="Category">
@@ -226,10 +215,7 @@ const handleDelete = async (item) => {
               Cancel
             </Button>
             <Button variant="outline-primary" onClick={handleSave}>
-              {edit ? "Save Changes" : "Save"}
-            </Button>
-            <Button variant="outline-primary" onClick={handleSave}>
-              {edit ? "Save Changes" : "Save"} and Publish
+              {edit ? "Save Changes" : "Save Expense"} 
             </Button>
           </Modal.Footer>
         </Modal>
@@ -244,7 +230,7 @@ const handleDelete = async (item) => {
         :
 
 
-        <Table bordered className="border-light my-2 table-dark" border={5} size="sm">
+        <Table bordered className={isDarkMode ? "border-light my-2 table-dark" : "border-dark my-2 table-light"} border={5} size="sm">
            <thead className="">
             <tr>
               <th className="text-center">ID</th>
@@ -255,8 +241,8 @@ const handleDelete = async (item) => {
             </tr>
           </thead>
           <tbody>
-            {expenseItems.map((expense,i) => (
-              expense.isPublished && (
+            {expenseItems.map((expense) => (
+
                 <tr key={expense.id}>
                   <td className="text-center">{expense.id}</td>
                   <td>{expense.description}</td>
@@ -267,7 +253,7 @@ const handleDelete = async (item) => {
                   <Button className="mx-3" variant="outline-info" onClick={(e) => handleShow(e,expense)}>Edit</Button>
                   </td>
                 </tr>
-              )
+              
             ))}
           </tbody>
         </Table>
