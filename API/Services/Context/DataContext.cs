@@ -15,7 +15,7 @@ namespace API.Services
         }
 
         public DbSet<UserModel> UserInfo {get; set;}
-        public DbSet<BlogItemModel> BlogInfo {get; set;}
+        public DbSet<ListItemModel> ItemInfo {get; set;}
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

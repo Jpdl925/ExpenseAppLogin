@@ -5,15 +5,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<UserService>();
-builder.Services.AddScoped<BlogItemService>();
+builder.Services.AddScoped<ListItemService>();
 builder.Services.AddScoped<PasswordService>();
 
-var connectionString = builder.Configuration.GetConnectionString("MyBlogString");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
 
 // Cors policy
 builder.Services.AddCors(options => {
-    options.AddPolicy("BlogPolicy",
+    options.AddPolicy("ExpensePolicy",
     builder => {
         builder.WithOrigins("http://localhost:5173", "http://localhost:3000")
         .AllowAnyHeader()
@@ -35,7 +35,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("BlogPolicy");
+app.UseCors("ExpensePolicy");
 
 
 app.UseHttpsRedirection();

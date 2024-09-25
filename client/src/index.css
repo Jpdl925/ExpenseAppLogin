@@ -1,10 +1,6 @@
-body.bg-dark{
-  background-color: #343a40 !important;
-  color: rgb(174, 168, 168) !important;
-}
-body.bg-light{
-  background-color: #aaa9a9 !important;
-  color: rgb(53, 48, 48) !important;
+body{
+  background-color: rgb(23, 24, 44);
+  color: rgb(210, 210, 195)
 }
 
 .welcome {
@@ -22,11 +18,6 @@ body.bg-light{
   overflow: hidden;
 }
 
-.carouselImage {
-  object-fit: cover;
-  height: 500px;
-  opacity: .6;
-}
 
 .form-container {
   width: 40px;
@@ -39,3 +30,4 @@ body.bg-light{
   padding:80px;
   border-radius: 20px;
 }
+

@@ -56,7 +56,7 @@ const Login = ({ }) => {
           <p>Login</p>
               <Form.Group className="mb-3" controlId="Username">
                 <Form.Label>Username</Form.Label>
-                <Form.Control type="text" placeholder="Enter Username" onChange={handleUser}/>
+                <Form.Control type="text" placeholder="Enter Username" onChange={(e) => handleUser(e)}/>
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">

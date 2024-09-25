@@ -10,59 +10,49 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class BlogController : ControllerBase
+    public class ListController : ControllerBase
     {
-        private readonly BlogItemService _data;
-        public BlogController(BlogItemService dataFromService)
+        private readonly ListItemService _data;
+        public ListController(ListItemService dataFromService)
         {
             _data = dataFromService;
         }
 
 
-        [HttpPost("AddBlogItems")]
-        public bool AddBlogItems(BlogItemModel newBlogItem){
-            return _data.AddBlogItems(newBlogItem);
+        [HttpPost("AddExpense")]
+        public bool AddExpense(ListItemModel newExpense){
+            return _data.AddListItem(newExpense);
         }
 
-        [HttpGet("GetBlogItem")]
-        public IEnumerable<BlogItemModel> GetAllBlogItems(){
-            return _data.GetAllBlogItems();
+        [HttpGet("GetExpense")]
+        public IEnumerable<ListItemModel> GetAllExpense(){
+            return _data.GetAllList();
         }
 
-        [HttpGet("GetBlogItemByCategory/{Category}")]
-        public IEnumerable<BlogItemModel> GetItemByCategory(string Category){
+        [HttpGet("GetExpenseByCategory/{Category}")]
+        public IEnumerable<ListItemModel> GetExpenseByCategory(string Category){
             return _data.GetItemByCategory(Category);
         }
 
-        [HttpGet("GetItemsByTag/{Tag}")]
-        public List<BlogItemModel> GetItemByTag(string Tag){
-            return _data.GetItemByTag(Tag);
+        [HttpPost("UpdateExpense")]
+        public bool UpdateExpense(ListItemModel ExpenseUpdate){
+            return _data.UpdateListItem(ExpenseUpdate);
         }
 
-        [HttpGet("GetItemsByDate/{Date}")]
-        public IEnumerable<BlogItemModel> GetItemByDate(string date){
-            return _data.GetItemByDate(date);
+        [HttpPost("DeleteExpense/{ExpenseDelete}")]
+        public bool DeleteExpense(ListItemModel ExpenseDelete){
+            return _data.DeleteListItem(ExpenseDelete);
         }
 
-        [HttpPost("UpdateBlogItems")]
-        public bool UpdateBlogItems(BlogItemModel BlogUpdate){
-            return _data.UpdateBlogItems(BlogUpdate);
-        }
-
-        [HttpPost("DeleteBlogItem/{BlogDelete}")]
-        public bool DeleteBlogItem(BlogItemModel BlogDelete){
-            return _data.DeleteBlogItem(BlogDelete);
-        }
-
-        // GetPublishedBlogItems
+        // GetPublishedItems
         [HttpGet("GetPublishedItems")]
-        public IEnumerable<BlogItemModel> GetPublishedItems(){
+        public IEnumerable<ListItemModel> GetPublishedItems(){
             return _data.GetPublishedItems();
         }
     // We need a GetItemsByUserId
         [HttpGet("GetItemsByUserId/{UserId}")]
 
-        public IEnumerable<BlogItemModel> GetItemsByUserId (int UserId){
+        public IEnumerable<ListItemModel> GetItemsByUserId (int UserId){
             return _data.GetItemsByUserId(UserId);
         }
     }

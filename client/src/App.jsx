@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container, Button, Row, Col } from "react-bootstrap";
 import NavBar from "./components/NavBar";
-import CarouselHero from "./components/CarouselHero";
 import Dashboard from "./components/Dashboard";
-import BlogPage from "./components/BlogPage";
 import CreateAccount from "./components/CreateAccount";
 import Login from "./components/Login";
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
@@ -60,14 +58,13 @@ const App = () => {
           style={{ minHeight: "100vh", padding: "0px" }}
           data-bs-theme={isDarkMode ? "dark" : "light"}
         >
-          <CarouselHero />
           <Row className="text-center">
             <Col>
-              <h1>Our Blog</h1>
+              <h1>Expenses</h1>
             </Col>
 
             <Routes>
-              <Route path="/" element={<BlogPage/>} />
+              <Route path="/" element={<Dashboard/>} />
               <Route path="/Login" element={<Login setUser={setUser}/>} />
               <Route path="/CreateAccount" element={<CreateAccount/>} />
               <Route path="/Dashboard" element={<Dashboard isDarkMode={isDarkMode} onLogin={handleLogin}/>} />

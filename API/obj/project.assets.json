@@ -4529,11 +4529,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\jtpg9\\Documents\\Academy\\Level4\\FullStackBlogL24\\API\\API.csproj",
+      "projectUniqueName": "C:\\Users\\jtpg9\\Documents\\Academy\\Level4\\Projects\\ExpenseAppLogin\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "c:\\Users\\jtpg9\\Documents\\Academy\\Level4\\FullStackBlogL24\\API\\API.csproj",
+      "projectPath": "C:\\Users\\jtpg9\\Documents\\Academy\\Level4\\Projects\\ExpenseAppLogin\\API\\API.csproj",
       "packagesPath": "C:\\Users\\jtpg9\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\jtpg9\\Documents\\Academy\\Level4\\FullStackBlogL24\\API\\obj\\",
+      "outputPath": "C:\\Users\\jtpg9\\Documents\\Academy\\Level4\\Projects\\ExpenseAppLogin\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\jtpg9\\AppData\\Roaming\\NuGet\\NuGet.Config"

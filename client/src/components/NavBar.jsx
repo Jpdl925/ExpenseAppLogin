@@ -28,16 +28,10 @@ const NavBar = ({
         fixed="top"
       >
         <Container>
-          <Navbar.Brand href="#home">Our Daily Blog</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link as={Link} to={"/"}>
-                Blog Page
-              </Nav.Link>
-              <Nav.Link as={Link} to={"/Dashboard"}>
-                Dashboard
-              </Nav.Link>
+            <Navbar.Brand href="#home">Expense Tracker</Navbar.Brand>
             </Nav>
 
             <Nav className="welcome">
@@ -49,18 +43,21 @@ const NavBar = ({
                 )}
               </Nav.Link>
 
-              <Nav.Link as={Link} to={"/CreateAccount"}>
-                Create Account
-              </Nav.Link>
+
 
               {isLoggedIn ? (
                 <Nav.Link as={Link} to={"/Login"} onClick={handleLogout}>
                   Logout
                 </Nav.Link>
               ) : (
+                <>
+              <Nav.Link as={Link} to={"/CreateAccount"}>
+                Create Account
+              </Nav.Link>
                 <Nav.Link as={Link} to={"/Login"}>
                   Login
                 </Nav.Link>
+                </>
               )}
 
               <Nav.Link>Welcome {user ? user.publisherName : "Guest"}</Nav.Link>
