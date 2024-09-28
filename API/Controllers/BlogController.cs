@@ -44,12 +44,10 @@ namespace API.Controllers
             return _data.DeleteListItem(ExpenseDelete);
         }
 
-        // GetPublishedItems
         [HttpGet("GetPublishedItems")]
         public IEnumerable<ListItemModel> GetPublishedItems(){
             return _data.GetPublishedItems();
         }
-    // We need a GetItemsByUserId
         [HttpGet("GetItemsByUserId/{UserId}")]
 
         public IEnumerable<ListItemModel> GetItemsByUserId (int UserId){

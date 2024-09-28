@@ -37,7 +37,7 @@ const CreateAccount = () => {
     <>
       <Container>
         <Row>
-          <Col className="form-container d-flex justify-content-center">
+          <Col className="mt-5 p-5 d-flex justify-content-center">
           
             <Form>
                 <p className="text-center">Create Account</p>

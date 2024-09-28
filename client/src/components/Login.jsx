@@ -11,17 +11,14 @@ const Login = ({ }) => {
     const [Username, setUsername] = useState("");
     const [Password, setPassword] = useState("");
 
-    // Function or method to handle our user
     const handleUser = (e) => {
         setUsername(e.target.value);
     }
 
-    // Function or method to handle our password
     const handlePassword = (e) => {
         setPassword(e.target.value);
     }
 
-    // Function or method to handle our submit
     const handleSubmit = async () => {
         let userData = {
             username: Username,
@@ -36,11 +33,9 @@ const Login = ({ }) => {
         if(token.token != null)
         {
           localStorage.setItem("Token",token.token);
-          // localStorage.setItem("UserData",JSON.stringify(userData));
           await GetLoggedInUser(Username);
           navigate("/Dashboard");
         }
-        // setUser(userData);
         return userData;
         
         
@@ -51,7 +46,7 @@ const Login = ({ }) => {
     <>
       <Container>
         <Row>
-          <Col className="form-container d-flex justify-content-center">
+          <Col className="mt-5 pt-5 d-flex justify-content-center">
             <Form>
           <p>Login</p>
               <Form.Group className="mb-3" controlId="Username">
